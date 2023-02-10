@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import HomeCardImage from "./images/rm_homepage.png";
+import { Link } from "react-router-dom";
 
-function App() {
+const Home = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col justify-center items-center h-screen">
+      <div>
+        <img
+          src={HomeCardImage}
+          alt="Rick and Morty"
+          height={300}
+          width={300}
+        />
+      </div>
+      <div className="flex">
+        <Link to="/characters">
+          <div className="border py-2 px-4 rounded-md text-white font-bold bg-gradient-to-tr from-[#97ce4c] to-[#557b1f] mx-2 cursor-pointer">
+            Characters
+          </div>
+        </Link>
+        <Link to="/episodes">
+          <div className="border py-2 px-4 rounded-md text-white font-bold bg-gradient-to-tl from-[#97ce4c] to-[#557b1f] mx-2 cursor-pointer">
+            Episodes
+          </div>
+        </Link>
+      </div>
     </div>
   );
-}
+};
 
-export default App;
+export default Home;

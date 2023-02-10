@@ -1,13 +1,56 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import "./index.css";
+import Home from "./App";
+import ReactDOM from "react-dom/client";
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+import ListCharacters from "./pages/characters";
+import ListEpisodes from "./pages/episodes";
+import ViewCharacter from "./pages/view-character";
+import ViewEpisode from "./pages/view-episode";
+import ErrorPage from "./pages/error-page";
+
+const client = new ApolloClient({
+  uri: "https://rickandmortyapi.com/graphql",
+  cache: new InMemoryCache(),
+});
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/characters",
+    element: <ListCharacters />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/characters/:id",
+    element: <ViewCharacter />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/episodes",
+    element: <ListEpisodes />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/episodes/:id",
+    element: <ViewEpisode />,
+    errorElement: <ErrorPage />,
+  },
+]);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <RouterProvider router={router} />
+    </ApolloProvider>
   </React.StrictMode>
 );
 
