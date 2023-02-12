@@ -15,12 +15,12 @@ const Home = () => {
       <div className="flex">
         <Link to="/characters">
           <div className="border py-2 px-4 rounded-md text-white font-bold bg-gradient-to-tr from-[#97ce4c] to-[#557b1f] mx-2 cursor-pointer">
-            Characters
+            View Characters
           </div>
         </Link>
         <Link to="/episodes">
           <div className="border py-2 px-4 rounded-md text-white font-bold bg-gradient-to-tl from-[#97ce4c] to-[#557b1f] mx-2 cursor-pointer">
-            Episodes
+            View Episodes
           </div>
         </Link>
       </div>

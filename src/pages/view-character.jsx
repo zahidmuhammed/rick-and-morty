@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { GET_CHAR_BY_ID } from "../queries/queries";
@@ -41,12 +42,14 @@ const ViewCharacter = () => {
             Episodes:
             <div className="grid grid-cols-6  gap-4">
               {data.character.episode.map((item, index) => (
-                <div className="flex border">
-                  <div className="bg-gray-300 p-1 flex items-center">
-                    {item.episode}
+                <Link to={`/episodes/${item.id}`} key={index}>
+                  <div className="flex border">
+                    <div className="bg-gray-300 p-1 flex items-center">
+                      {item.episode}
+                    </div>
+                    <div className="flex items-center pl-3">{item.name}</div>
                   </div>
-                  <div className="flex items-center pl-3">{item.name}</div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
