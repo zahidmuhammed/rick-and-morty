@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_EPISODES } from "../queries/queries";
+import HeaderFooter from "../components/layout";
 
 const ListEpisodes = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -22,8 +23,8 @@ const ListEpisodes = () => {
       </div>
     );
   return (
-    <>
-      <div className="flex my-4">
+    <HeaderFooter>
+      <div className="flex my-4 ">
         <input
           value={searchName}
           onChange={(e) => setSearchName(e.target.value)}
@@ -47,7 +48,7 @@ const ListEpisodes = () => {
         <div className="grid grid-cols-2 md:grid-cols-2 text-center gap-3 px-2 md:px-6">
           {data.episodes.results.map((item, index) => (
             <Link key={index} to={`/episodes/${item.id}`}>
-              <div className="border p-2">
+              <div className="border p-2 bg-white h-full flex flex-col justify-center">
                 <div>
                   {item.episode} - {item.name}
                 </div>
@@ -77,7 +78,7 @@ const ListEpisodes = () => {
           Next
         </button>
       </div>
-    </>
+    </HeaderFooter>
   );
 };
 

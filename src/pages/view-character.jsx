@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { GET_CHAR_BY_ID } from "../queries/queries";
+import HeaderFooter from "../components/layout";
+import { IoIosArrowDropleft } from "react-icons/io";
 
 const ViewCharacter = () => {
   const params = useParams();
@@ -21,41 +23,76 @@ const ViewCharacter = () => {
     );
 
   return (
-    <div>
+    <HeaderFooter>
       {loading ? (
-        <>Loading....</>
+        <div className="h-screen text-white flex justify-center bg-[#97ce4c]">
+          Loading...
+        </div>
       ) : (
-        <div>
-          <div className="flex mx-10">
+        <div className="px-3 bg-[#97ce4c]">
+          <div className="w-full text-center font-bold text-2xl py-4">
+            {data.character.name}
+          </div>
+          <div className="flex bg-white text-sm md:text-xl md:mx-32">
             <div>
-              <img src={data.character.image} alt="avatar" />
+              <img
+                src={data.character.image}
+                alt="avatar"
+                className="h-32 md:h-64 w-32 md:w-64"
+              />
             </div>
-            <div>
-              <div>Name:{data.character.name}</div>
-              <div>Origin:{data.character.origin.name}</div>
-              <div>Species:{data.character.species}</div>
-              <div>Location:{data.character.location.name}</div>
-              <div>Gender:{data.character.gender}</div>
+            <div className="px-1 md:px-12 flex flex-col justify-center">
+              <div>
+                Character Name:{" "}
+                <span className="font-bold">{data.character.name}</span>
+              </div>
+              <div>
+                Origin:{" "}
+                <span className="font-bold">{data.character.origin.name}</span>
+              </div>
+              <div>
+                Species:{" "}
+                <span className="font-bold">{data.character.species}</span>
+              </div>
+              <div>
+                Location:{" "}
+                <span className="font-bold">
+                  {data.character.location.name}
+                </span>
+              </div>
+              <div>
+                Gender:{" "}
+                <span className="font-bold">{data.character.gender}</span>
+              </div>
             </div>
           </div>
-          <div className="mx-32">
-            Episodes:
-            <div className="grid grid-cols-6  gap-4">
+          <div className="md:px-32">
+            <div className="py-3 md:py-8">
+              Episodes in which the character appears :
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-5  gap-4">
               {data.character.episode.map((item, index) => (
                 <Link to={`/episodes/${item.id}`} key={index}>
-                  <div className="flex border">
-                    <div className="bg-gray-300 p-1 flex items-center">
+                  <div className="flex border h-full">
+                    <div className="bg-gray-300 p-1 md:px-3 flex items-center">
                       {item.episode}
                     </div>
-                    <div className="flex items-center pl-3">{item.name}</div>
+                    <div className="bg-white w-full flex items-center pl-3">
+                      {item.name}
+                    </div>
                   </div>
                 </Link>
               ))}
             </div>
+            <div className="flex justify-end py-3">
+              <Link to="/characters">
+                <IoIosArrowDropleft size={32} color="#1E90FF" />
+              </Link>
+            </div>
           </div>
         </div>
       )}
-    </div>
+    </HeaderFooter>
   );
 };
 

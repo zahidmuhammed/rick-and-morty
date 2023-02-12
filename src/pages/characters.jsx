@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_CHARACTERS } from "../queries/queries";
+import HeaderFooter from "../components/layout";
+import { CgChevronLeftO, CgChevronRightO } from "react-icons/cg";
 
 const ListCharacters = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -29,9 +31,12 @@ const ListCharacters = () => {
     );
 
   return (
-    <>
-      <div className="flex justify-around mt-6">
-        <div className="flex flex-col md:flex-row md:items-center">
+    <HeaderFooter>
+      <div className="bg-[#97ce4c] font-bold w-full text-center text-2xl py-4">
+        Characters
+      </div>
+      <div className="flex justify-between py-1 bg-[#97ce4c] px-3 md:px-32 md:py-4">
+        <div className="flex flex-col md:flex-row md:items-center ">
           Status
           <select
             className="outline-none p-1 rounded-md md:mx-3"
@@ -73,7 +78,7 @@ const ListCharacters = () => {
         <div className="flex flex-col md:flex-row md:items-center">
           Gender
           <select
-            className="outline-none p-1 rounded-md md:mx-3"
+            className="outline-none p-1 rounded-md md:ml-3"
             value={charGender}
             onChange={(e) => {
               setCharGender(e.target.value);
@@ -87,16 +92,22 @@ const ListCharacters = () => {
           </select>
         </div>
       </div>
-      <div className="flex my-4">
+      <div className="flex py-4 bg-[#97ce4c] px-3 md:px-32">
         <input
           value={searchName}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setPageNumber(1);
+              setCharName(searchName);
+            }
+          }}
           onChange={(e) => setSearchName(e.target.value)}
-          placeholder="search characters..."
-          className="flex-1 ml-6 border outline-none px-4 py-1 rounded-l-md"
+          placeholder="Enter character name"
+          className="w-2/3 md:w-3/4 border outline-none px-4 py-1 rounded-l-md "
           type="text"
         />
         <button
-          className="flex-1 border mr-6 bg-gray-200 rounded-r-md"
+          className="w-1/3 md:w-1/4 border bg-gray-200 rounded-r-md"
           onClick={() => {
             setPageNumber(1);
             setCharName(searchName);
@@ -106,14 +117,15 @@ const ListCharacters = () => {
         </button>
       </div>
       {loading ? (
-        <>Loading...</>
+        <div className="h-screen text-white flex justify-center bg-[#97ce4c]">
+          Loading...
+        </div>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 px-2 md:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 px-3 md:px-32 bg-[#97ce4c]">
           {data.characters.results.map((item, index) => (
             <Link key={index} to={`/characters/${item.id}`}>
-              <div className="flex border flex-col justify-center items-center py-4">
-                <div>Id:{item.id}</div>
-                <div className="py-3">
+              <div className="flex border flex-col justify-center items-center py-4 bg-white h-full">
+                <div className="border-4 rounded-full">
                   <img
                     src={item.image}
                     className="rounded-full"
@@ -122,7 +134,7 @@ const ListCharacters = () => {
                     width={75}
                   />
                 </div>
-                <div className="text-sm text-center font-bold w-2/3">
+                <div className="text-sm text-center font-bold w-2/3 py-1">
                   {item.name}
                 </div>
               </div>
@@ -130,25 +142,36 @@ const ListCharacters = () => {
           ))}
         </div>
       )}
-      <div className="flex justify-center ">
+      {!data?.characters.info.count && (
+        <div className="w-full text-center h-screen bg-[#97ce4c]">
+          No characters found.
+        </div>
+      )}
+
+      <div className="flex justify-center py-5 bg-[#97ce4c]">
         <button
-          hidden={pageNumber === 1}
+          className="px-6"
+          hidden={pageNumber === 1 || !data?.characters.info.count}
           onClick={() => {
             setPageNumber(pageNumber - 1);
           }}
         >
-          Prev
+          <CgChevronLeftO size={30} color="#fff" />
         </button>
         <button
-          hidden={pageNumber === data?.characters.info.pages}
+          className="px-6"
+          hidden={
+            pageNumber === data?.characters.info.pages ||
+            !data?.characters.info.count
+          }
           onClick={() => {
             setPageNumber(pageNumber + 1);
           }}
         >
-          Next
+          <CgChevronRightO size={30} color="#fff" />
         </button>
       </div>
-    </>
+    </HeaderFooter>
   );
 };
 
