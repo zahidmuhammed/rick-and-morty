@@ -74,10 +74,10 @@ const ViewCharacter = () => {
               {data.character.episode.map((item, index) => (
                 <Link to={`/episodes/${item.id}`} key={index}>
                   <div className="flex border h-full">
-                    <div className="bg-gray-300 p-1 md:px-3 flex items-center">
+                    <div className="bg-gray-300 p-1 md:px-3 flex items-center text-sm md:text-base">
                       {item.episode}
                     </div>
-                    <div className="bg-white w-full flex items-center pl-3">
+                    <div className="bg-white w-full flex items-center px-1 md:px-3">
                       {item.name}
                     </div>
                   </div>
