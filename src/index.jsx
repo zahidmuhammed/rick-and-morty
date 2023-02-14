@@ -17,33 +17,36 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/characters",
-    element: <ListCharacters />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/characters/:id",
-    element: <ViewCharacter />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/episodes",
-    element: <ListEpisodes />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/episodes/:id",
-    element: <ViewEpisode />,
-    errorElement: <ErrorPage />,
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Home />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/characters",
+      element: <ListCharacters />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/characters/:id",
+      element: <ViewCharacter />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/episodes",
+      element: <ListEpisodes />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/episodes/:id",
+      element: <ViewEpisode />,
+      errorElement: <ErrorPage />,
+    },
+  ],
+  { basename: "/rick-and-morty" }
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

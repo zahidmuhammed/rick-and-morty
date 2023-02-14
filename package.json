@@ -1,6 +1,6 @@
 {
   "name": "rickandmorty",
-  "home": "https://zahidmuhammed.github.io/rick-and-morty",
+  "homepage": "https://zahidmuhammed.github.io/rick-and-morty/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
