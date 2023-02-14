@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { GET_CHAR_BY_ID } from "../queries/queries";
 import HeaderFooter from "../components/layout";
 import { IoIosArrowDropleft } from "react-icons/io";
+import Spinner from "../components/spinner";
 
 const ViewCharacter = () => {
   const params = useParams();
@@ -25,15 +26,13 @@ const ViewCharacter = () => {
   return (
     <HeaderFooter>
       {loading ? (
-        <div className="h-screen text-white flex justify-center bg-[#97ce4c]">
-          Loading...
-        </div>
+        <Spinner />
       ) : (
-        <div className="px-3 bg-[#97ce4c]">
+        <div className="px-3 bg-primary">
           <div className="w-full text-center font-bold text-2xl py-4">
             {data.character.name}
           </div>
-          <div className="flex bg-white text-sm md:text-xl md:mx-32">
+          <div className="flex bg-secondary text-primary rounded-sm text-sm md:text-xl md:mx-32">
             <div>
               <img
                 src={data.character.image}
@@ -66,18 +65,18 @@ const ViewCharacter = () => {
               </div>
             </div>
           </div>
-          <div className="md:px-32">
+          <div className="md:px-20 lg:px-32">
             <div className="py-3 md:py-8">
               Episodes in which the character appears :
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-5  gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4">
               {data.character.episode.map((item, index) => (
                 <Link to={`/episodes/${item.id}`} key={index}>
-                  <div className="flex border h-full">
-                    <div className="bg-gray-300 p-1 md:px-3 flex items-center text-sm md:text-base">
+                  <div className="flex h-full">
+                    <div className="bg-secondary text-offwhite p-1 md:px-3 flex items-center text-sm md:text-base">
                       {item.episode}
                     </div>
-                    <div className="bg-white w-full flex items-center px-1 md:px-3">
+                    <div className="bg-gray-300 w-full flex items-center px-1 md:px-3">
                       {item.name}
                     </div>
                   </div>

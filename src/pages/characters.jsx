@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { GET_CHARACTERS } from "../queries/queries";
 import HeaderFooter from "../components/layout";
 import { CgChevronLeftO, CgChevronRightO } from "react-icons/cg";
+import Spinner from "../components/spinner";
 
 const ListCharacters = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -32,14 +33,14 @@ const ListCharacters = () => {
 
   return (
     <HeaderFooter>
-      <div className="bg-[#97ce4c] font-bold w-full text-center text-2xl py-4">
+      <div className="bg-[#59e369] font-bold w-full text-secondary text-center text-2xl py-4">
         Characters
       </div>
-      <div className="flex justify-between py-1 bg-[#97ce4c] px-3 md:px-32 md:py-4">
-        <div className="flex flex-col md:flex-row md:items-center ">
+      <div className="flex justify-between py-1 bg-primary px-3 md:px-32 md:py-4">
+        <div className="flex flex-col md:flex-row md:items-center text-secondary">
           Status
           <select
-            className="outline-none p-1 rounded-md md:mx-3"
+            className="outline-none p-1 rounded-md md:mx-3 bg-secondary text-primary"
             value={charStatus}
             onChange={(e) => {
               setCharStatus(e.target.value);
@@ -52,10 +53,10 @@ const ListCharacters = () => {
             <option value="unknown">unknown</option>
           </select>
         </div>
-        <div className="flex flex-col md:flex-row md:items-center">
+        <div className="flex flex-col md:flex-row items-center text-secondary">
           Species
           <select
-            className="outline-none p-1 rounded-md md:mx-3"
+            className="outline-none p-1 rounded-md md:mx-3 bg-secondary text-primary w-2/3"
             value={charSpecies}
             onChange={(e) => {
               setCharSpecies(e.target.value);
@@ -75,10 +76,10 @@ const ListCharacters = () => {
             <option value="unknown">unknown</option>
           </select>
         </div>
-        <div className="flex flex-col md:flex-row md:items-center">
+        <div className="flex flex-col md:flex-row items-end md:items-center text-secondary ">
           Gender
           <select
-            className="outline-none p-1 rounded-md md:ml-3"
+            className="outline-none p-1 rounded-md md:ml-3 bg-secondary text-primary"
             value={charGender}
             onChange={(e) => {
               setCharGender(e.target.value);
@@ -88,11 +89,12 @@ const ListCharacters = () => {
             <option value="">All</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
+            <option value="genderless">Genderless</option>
             <option value="unknown">unknown</option>
           </select>
         </div>
       </div>
-      <div className="flex py-4 bg-[#97ce4c] px-3 md:px-32">
+      <div className="flex py-4 bg-primary px-3 md:px-32">
         <input
           value={searchName}
           onKeyDown={(e) => {
@@ -103,11 +105,11 @@ const ListCharacters = () => {
           }}
           onChange={(e) => setSearchName(e.target.value)}
           placeholder="Enter character name"
-          className="w-2/3 md:w-3/4 border outline-none px-4 py-1 rounded-l-md "
+          className="w-2/3 md:w-3/4 outline-none px-4 py-1 rounded-l-md "
           type="text"
         />
         <button
-          className="w-1/3 md:w-1/4 border bg-gray-200 rounded-r-md"
+          className="w-1/3 md:w-1/4 rounded-r-md bg-secondary text-primary"
           onClick={() => {
             setPageNumber(1);
             setCharName(searchName);
@@ -117,14 +119,12 @@ const ListCharacters = () => {
         </button>
       </div>
       {loading ? (
-        <div className="h-screen text-white flex justify-center bg-[#97ce4c]">
-          Loading...
-        </div>
+        <Spinner />
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 px-3 md:px-32 bg-[#97ce4c]">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 px-3 md:px-32 bg-primary">
           {data.characters.results.map((item, index) => (
             <Link key={index} to={`/characters/${item.id}`}>
-              <div className="flex border flex-col justify-center items-center py-4 bg-white h-full">
+              <div className="flex flex-col justify-center items-center py-4 bg-secondary text-primary rounded-br-3xl rounded-tl-3xl h-full">
                 <div className="border-4 rounded-full">
                   <img
                     src={item.image}
@@ -143,12 +143,12 @@ const ListCharacters = () => {
         </div>
       )}
       {!data?.characters.info.count && (
-        <div className="w-full text-center h-screen bg-[#97ce4c]">
+        <div className="w-full text-center h-screen bg-primary">
           No characters found.
         </div>
       )}
 
-      <div className="flex justify-center py-5 bg-[#97ce4c]">
+      <div className="flex justify-center py-5 bg-primary">
         <button
           className="px-6"
           hidden={pageNumber === 1 || !data?.characters.info.count}
