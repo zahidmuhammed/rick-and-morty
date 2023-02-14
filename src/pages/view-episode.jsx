@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
-import { GET_EPIS_BY_ID } from "../queries/queries";
-import HeaderFooter from "../components/layout";
-import { IoIosArrowDropleft } from "react-icons/io";
 import Spinner from "../components/spinner";
+import { useParams } from "react-router-dom";
+import HeaderFooter from "../components/layout";
+import { GET_EPIS_BY_ID } from "../queries/queries";
+import { IoIosArrowDropleft } from "react-icons/io";
 
 const ViewEpisode = () => {
   const params = useParams();

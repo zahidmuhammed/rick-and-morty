@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { GET_EPISODES } from "../queries/queries";
-import HeaderFooter from "../components/layout";
-import { CgChevronLeftO, CgChevronRightO } from "react-icons/cg";
 import Spinner from "../components/spinner";
+import HeaderFooter from "../components/layout";
+import { GET_EPISODES } from "../queries/queries";
+import { CgChevronLeftO, CgChevronRightO } from "react-icons/cg";
 
 const ListEpisodes = () => {
   const [pageNumber, setPageNumber] = useState(1);

@@ -1,5 +1,5 @@
-import HomeCardImage from "./images/rm_homepage.png";
 import { Link } from "react-router-dom";
+import HomeCardImage from "./images/rm_homepage.png";
 import HeaderFooter from "./components/layout";
 
 const Home = () => {

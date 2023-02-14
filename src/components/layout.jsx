@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import logo from "../images/rm_title.png";
 import { Link } from "react-router-dom";
+import logo from "../images/rm_title.png";
 import { HiHome, HiSwatch, HiUsers } from "react-icons/hi2";
 
 const HeaderFooter = ({ children }) => {
